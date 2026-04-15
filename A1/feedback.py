@@ -1,6 +1,6 @@
 """Pseudo-relevance feedback (Rocchio-style)."""
 
-from collections import Counter, defaultdict
+from collections import defaultdict
 
 from A1.index import InvertedIndex
 
@@ -15,13 +15,13 @@ def rocchio_expand(
 ) -> dict[str, float]:
     """Expand query using Rocchio-style pseudo-relevance feedback.
 
-    Takes top-k retrieved document internal IDs, extracts discriminative terms
-    weighted by IDF * tf_in_feedback_docs, and adds them to the query.
+    Uses the forward index (doc_terms) for fast term extraction from
+    feedback documents, weighted by IDF * tf.
 
     Args:
         query_terms: original query term weights
         top_doc_ids: internal IDs of top-k pseudo-relevant documents
-        index: the inverted index
+        index: the inverted index (must have doc_terms populated)
         alpha: weight for original query terms
         beta: weight for expansion terms
         num_expand_terms: number of terms to add
@@ -32,26 +32,25 @@ def rocchio_expand(
     if not top_doc_ids:
         return query_terms
 
-    # Collect term frequencies across feedback documents
-    feedback_tf: dict[str, float] = defaultdict(float)
-    for term, postings in index.postings.items():
-        idf = index.idf.get(term, 0.0)
-        if idf <= 0:
-            continue
-        for doc_id, tf in postings:
-            if doc_id in _fast_set(top_doc_ids):
-                feedback_tf[term] += tf * idf
+    # Collect IDF-weighted term scores from feedback documents
+    feedback_scores: dict[str, float] = defaultdict(float)
+    for doc_id in top_doc_ids:
+        doc_tf = index.doc_terms[doc_id]
+        for term, tf in doc_tf.items():
+            idf = index.idf.get(term, 0.0)
+            if idf > 0:
+                feedback_scores[term] += tf * idf
 
     # Normalize by number of feedback docs
     n_fb = len(top_doc_ids)
-    for term in feedback_tf:
-        feedback_tf[term] /= n_fb
+    for term in feedback_scores:
+        feedback_scores[term] /= n_fb
 
     # Select top expansion terms (excluding original query terms)
     original_terms = set(query_terms.keys())
     candidates = [
         (term, score)
-        for term, score in feedback_tf.items()
+        for term, score in feedback_scores.items()
         if term not in original_terms
     ]
     candidates.sort(key=lambda x: -x[1])
@@ -63,14 +62,8 @@ def rocchio_expand(
         expanded[term] = alpha * weight
 
     if expand_terms:
-        max_expand_score = expand_terms[0][1] if expand_terms else 1.0
+        max_score = expand_terms[0][1]
         for term, score in expand_terms:
-            # Normalize expansion term weights relative to the strongest one
-            expanded[term] = beta * (score / max_expand_score)
+            expanded[term] = beta * (score / max_score)
 
     return expanded
-
-
-def _fast_set(doc_ids: list[int]) -> frozenset[int]:
-    """Convert doc_ids to a frozenset for O(1) membership checks."""
-    return frozenset(doc_ids)

@@ -22,6 +22,11 @@ class InvertedIndex:
     postings: dict[str, list[tuple[int, int]]] = field(default_factory=dict)
     # title/heading field postings (same structure)
     title_postings: dict[str, list[tuple[int, int]]] = field(default_factory=dict)
+    # positional index: term -> {doc_id: [pos0, pos1, ...]}
+    # Only populated when store_positions=True
+    positions: dict[str, dict[int, list[int]]] = field(default_factory=dict)
+    # forward index: doc_id -> {term: tf} (only populated when store_forward=True)
+    doc_terms: list[dict[str, int]] = field(default_factory=list)
     # document metadata indexed by internal id
     doc_meta: list[DocInfo] = field(default_factory=list)
     # docno string -> internal int id
@@ -46,6 +51,8 @@ def build_index(
     tokenize_fn: Callable[[str], list[str]],
     normalize_fn: Callable[[list[str]], list[str]] | None = None,
     extract_fields: bool = False,
+    store_forward: bool = False,
+    store_positions: bool = False,
 ) -> InvertedIndex:
     """Build an inverted index from a document stream.
 
@@ -54,6 +61,8 @@ def build_index(
         tokenize_fn: tokenizer function
         normalize_fn: optional normalization pipeline (case fold + stem + stopword removal)
         extract_fields: if True, also build title_postings
+        store_forward: if True, store forward index (doc_id -> {term: tf}) for fast PRF
+        store_positions: if True, store term positions for proximity scoring
     """
     idx = InvertedIndex()
     total_length = 0
@@ -70,6 +79,18 @@ def build_index(
         tf_counts = Counter(tokens)
         doc_length = len(tokens)
         l2_norm = math.sqrt(sum(c * c for c in tf_counts.values())) if tf_counts else 0.0
+
+        # Build position lists
+        if store_positions:
+            term_positions: dict[str, list[int]] = {}
+            for pos, term in enumerate(tokens):
+                if term not in term_positions:
+                    term_positions[term] = []
+                term_positions[term].append(pos)
+            for term, positions in term_positions.items():
+                if term not in idx.positions:
+                    idx.positions[term] = {}
+                idx.positions[term][doc_id] = positions
 
         # Title field processing
         title_length = 0
@@ -89,6 +110,10 @@ def build_index(
         )
         idx.doc_meta.append(info)
         total_length += doc_length
+
+        # Store forward index for PRF
+        if store_forward:
+            idx.doc_terms.append(dict(tf_counts))
 
         # Add to main postings
         for term, count in tf_counts.items():

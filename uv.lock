@@ -8,13 +8,43 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "pystemmer" },
+    { name = "ufal-morphodita" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "pystemmer", specifier = ">=3.0.0" }]
+requires-dist = [
+    { name = "pystemmer", specifier = ">=3.0.0" },
+    { name = "ufal-morphodita", specifier = ">=1.11.0" },
+]
 
 [[package]]
 name = "pystemmer"
 version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/8f/ca/959415b311e05812c1cfe926e21a6c64dd0131b076f258805891c10840e7/pystemmer-3.0.0.tar.gz", hash = "sha256:eb9f31accf188e733f0f375cad1594f7cc21ad86b20977ccce0c7162c7c6c35e", size = 303779, upload-time = "2025-05-08T03:21:40.943Z" }
+
+[[package]]
+name = "ufal-morphodita"
+version = "1.11.3.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/50/84/33e291dc9b67d1d1f8bb346c895b6481c4713a78d7530ad477cfa3dc6f79/ufal_morphodita-1.11.3.3.tar.gz", hash = "sha256:26f59be734227d2f8017131e94dc5198fccb4d71d7f3fad0b04f3bfa1858d59b", size = 199658, upload-time = "2025-12-02T09:39:43.017Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4c/56/9c278c480adf4510b3269db20681734b900c820f97d560e8a06e7955dd26/ufal_morphodita-1.11.3.3-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:87e6d786a29ea1c79c9386b7e807752c9e4bc9ca797232c6e5122fa959b0d2fa", size = 437045, upload-time = "2025-12-02T10:02:56.389Z" },
+    { url = "https://files.pythonhosted.org/packages/2b/18/7b22b87e36fcd7fa6771b2032ba628e7b46325a01deb6aa769ebd448eeb2/ufal_morphodita-1.11.3.3-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:a7db11860c99bc08187f61d340a49476c059d0d601fc49f818d9ea0adff2bcc7", size = 414441, upload-time = "2025-12-02T10:02:57.917Z" },
+    { url = "https://files.pythonhosted.org/packages/7b/85/26d5cbd2543d7634797326fd03268a950c69275c62c7f2b0d29c4037a1b9/ufal_morphodita-1.11.3.3-cp314-cp314-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0746fc4e828e80eb3104182209525b4fde0246c1d285c5796e07853f97a580d1", size = 380508, upload-time = "2025-12-02T10:02:59.348Z" },
+    { url = "https://files.pythonhosted.org/packages/b5/f5/5fd1026b55b29a1bc3b66bedb6f760948b45670dd72da954f1b6cbf0d2e4/ufal_morphodita-1.11.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:863fe9a5308f88ef9112501ec15e0365b5e8d483deab9d16b995df20d7fedb31", size = 410348, upload-time = "2025-12-02T10:03:01.101Z" },
+    { url = "https://files.pythonhosted.org/packages/01/27/b4c5883e1f4bd4c0e7eccc9c19c0c3da023aec8d2a289465dd613d186ac8/ufal_morphodita-1.11.3.3-cp314-cp314-musllinux_1_2_aarch64.whl", hash = "sha256:ab1a49790b0641413bc4e4d41ca4a0e7bc53584cd38ef9c2dcc4683ba8c7e6d0", size = 1377831, upload-time = "2025-12-02T10:03:03.452Z" },
+    { url = "https://files.pythonhosted.org/packages/1d/f0/df2dddb5db57fb6e885493a16cf1346856a2571481f4d7659ceceb920623/ufal_morphodita-1.11.3.3-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:b6cb8711fd7e9597be77531f4b24f40baee3f1f13fe44e6497b66e3c973f7aea", size = 1452148, upload-time = "2025-12-02T10:03:05.09Z" },
+    { url = "https://files.pythonhosted.org/packages/e8/f3/0456fbc1a460d5ab23e6311edc4f60b1a6f801eb0d933c12dd8071447c55/ufal_morphodita-1.11.3.3-cp314-cp314-win32.whl", hash = "sha256:8fcb2a80904467aae1a0159daaa6a1cfef8b895b72c9e2620eb2a68aad44e50a", size = 433068, upload-time = "2025-12-02T10:03:06.368Z" },
+    { url = "https://files.pythonhosted.org/packages/21/7a/4c680d8c2ea423486deb9f086f0e61b9c983e4b83ba6282e6e2d6b86ebb5/ufal_morphodita-1.11.3.3-cp314-cp314-win_amd64.whl", hash = "sha256:429df2408ae5385f6a524433a8574e81ce7746e72a8673cd292950b37499c113", size = 503532, upload-time = "2025-12-02T10:03:08.052Z" },
+    { url = "https://files.pythonhosted.org/packages/af/15/a0eb921a28438753620740bf252f6c6645d2d764da42be177b09617d1a44/ufal_morphodita-1.11.3.3-cp314-cp314-win_arm64.whl", hash = "sha256:4c809ecfd006f1b80a0eca5a1eaa247731c35db8995c5b7d50c961de937a2a6d", size = 686901, upload-time = "2025-12-02T10:03:09.491Z" },
+    { url = "https://files.pythonhosted.org/packages/36/a6/4d43181cdfdb90443353b28f056a402b709fdafed5c0b7ac11a97eec7315/ufal_morphodita-1.11.3.3-cp314-cp314t-macosx_10_15_x86_64.whl", hash = "sha256:8bf175ba249131356b72449a70d21f453f3c4b95c249239e0278da98055e8329", size = 441805, upload-time = "2025-12-02T10:03:11.429Z" },
+    { url = "https://files.pythonhosted.org/packages/c8/56/cb77cf4a9496714d9fb414ceb497b3b506601180e08a9a6ae6db87684b48/ufal_morphodita-1.11.3.3-cp314-cp314t-macosx_11_0_arm64.whl", hash = "sha256:9858883f55c857f1d0e4b4cbc6cb7dafe74db8359300b38fd873e33f867674b0", size = 419832, upload-time = "2025-12-02T10:03:12.96Z" },
+    { url = "https://files.pythonhosted.org/packages/59/b6/ec1504bf45bc6ba3640ee25e3907a718a6640e711bd6c939199d242fc682/ufal_morphodita-1.11.3.3-cp314-cp314t-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:49ad9596519a83eed9d83c556606c3fce791d27889ab630c9823485c330b238d", size = 377812, upload-time = "2025-12-02T10:03:15.014Z" },
+    { url = "https://files.pythonhosted.org/packages/fb/ba/53d6502f09c80d0e3e67e384c63a12a40ed99e1aefa48b172e35d1defb2a/ufal_morphodita-1.11.3.3-cp314-cp314t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:36930287edd44e324dbbbbf730caaa35d3501582f9cb23760acaf41bed3e3ca9", size = 406011, upload-time = "2025-12-02T10:03:16.551Z" },
+    { url = "https://files.pythonhosted.org/packages/e9/7b/0ab47620ceab06442fb473fa259d5160e6f36bdc5ff2cac6a774ea7aace5/ufal_morphodita-1.11.3.3-cp314-cp314t-musllinux_1_2_aarch64.whl", hash = "sha256:064bb89f5a39afdd2e1b07b22dada9b64c3c14db08c3711af83b488743e46ceb", size = 1376201, upload-time = "2025-12-02T10:03:18.197Z" },
+    { url = "https://files.pythonhosted.org/packages/78/2e/7632ced000eeb961b9eafac13c150ba7131c0d3efaed59c897fdaa7ea3ad/ufal_morphodita-1.11.3.3-cp314-cp314t-musllinux_1_2_x86_64.whl", hash = "sha256:63ba6cb84b42213368b8b4131a0a2c1545383071c699a3952fa77237b73579a0", size = 1446745, upload-time = "2025-12-02T10:03:20.656Z" },
+    { url = "https://files.pythonhosted.org/packages/0c/66/c6bae969170af6785acc2b4cdcc198de464b7d657733bf2344fa2e8d2718/ufal_morphodita-1.11.3.3-cp314-cp314t-win32.whl", hash = "sha256:db3f97095c76e7b8baef0ceeda30286453a873f7f777a63717da52360ae9f22c", size = 438256, upload-time = "2025-12-02T10:03:22.389Z" },
+    { url = "https://files.pythonhosted.org/packages/7e/e3/c95bacd29f94d012adf99ef85fe507df2cb9a7feb9957eb43adca52c89a1/ufal_morphodita-1.11.3.3-cp314-cp314t-win_amd64.whl", hash = "sha256:ecaf4f0ad3c43db075df2dd7ea2fa044772af1a7601975eaa88c9260504820eb", size = 512223, upload-time = "2025-12-02T10:03:23.82Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/e3/081008b9d728604bb3257d7a906c9a15a6b4331b4222b242a1762e8f8163/ufal_morphodita-1.11.3.3-cp314-cp314t-win_arm64.whl", hash = "sha256:978c898d9ce7af027207411db258ddbf3aa01c8b449b261be42fefd319185b90", size = 694054, upload-time = "2025-12-02T10:03:25.257Z" },
+]
